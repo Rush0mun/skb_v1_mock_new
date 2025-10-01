@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LayoutDashboard, Users, Bell, Image, Trophy, FileText, Menu, LogOut, Shield, User, Chrome as Home } from "lucide-react";
+import { LayoutDashboard, Users, Bell, Image, Trophy, FileText, Menu, LogOut, Shield, User, Info, Chrome as Home } from "lucide-react";
+
 import { getAdminUser, removeAdminAuth, isAuthenticated, AdminUser } from "@/lib/auth";
 import { toast } from "sonner";
 
@@ -19,10 +20,9 @@ const navigation = [
   { name: 'Home', href: '/admin/home', icon: Home },
   { name: 'Members', href: '/admin/members', icon: Users },
   { name: 'Notices', href: '/admin/notices', icon: Bell },
+  { name: 'Tournaments', href: '/admin/tournaments', icon: Trophy },
   { name: 'Gallery', href: '/admin/gallery', icon: Image },
-    { name: 'Tournaments', href: '/admin/tournaments', icon: Trophy },
-
-
+  { name: 'About', href: '/admin/about', icon: Info },
 ];
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
