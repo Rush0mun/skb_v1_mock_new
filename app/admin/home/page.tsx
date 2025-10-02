@@ -24,8 +24,13 @@ const homeSliderFormSchema = z.object({
   subtitle: z.string()
     .min(10, "Subtitle must be at least 10 characters")
     .max(500, "Subtitle must not exceed 500 characters"),
+  logoImageUrl: z.string()
+    .url("Please enter a valid image URL")
+    .min(1, "Logo image URL is required"),
   slides: z.array(z.object({
     imageUrl: z.string()
+    .url("Please enter a valid image URL")
+    .min(1, "Logo image URL is required"),
       .url("Please enter a valid image URL")
       .min(1, "Image URL is required"),
     altText: z.string()
@@ -47,6 +52,7 @@ export default function AdminHomePage() {
     defaultValues: {
       title: "",
       subtitle: "",
+      logoImageUrl: "",
       slides: []
     },
   });
@@ -92,6 +98,7 @@ export default function AdminHomePage() {
         form.reset({
           title: data.data.title,
           subtitle: data.data.subtitle,
+          logoImageUrl: data.data.logoImageUrl || "",
           slides: data.data.slides.sort((a, b) => a.order - b.order)
         });
       } else {
@@ -317,6 +324,41 @@ export default function AdminHomePage() {
                       )}
                     />
 
+                    <FormField
+                      control={form.control}
+                      name="logoImageUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Navigation Logo URL</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="https://example.com/logo.jpg"
+                              {...field}
+                              disabled={isSubmitting}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                          {form.watch('logoImageUrl') && (
+                            <div className="mt-2">
+                              <p className="text-sm text-gray-600 mb-2">Logo Preview:</p>
+                              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-200">
+                                <Image
+                                  src={form.watch('logoImageUrl')}
+                                  alt="Logo preview"
+                                  width={40}
+                                  height={40}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = 'https://images.pexels.com/photos/7045693/pexels-photo-7045693.jpeg';
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </FormItem>
+                      )}
+                    />
                     <FormField
                       control={form.control}
                       name="subtitle"
