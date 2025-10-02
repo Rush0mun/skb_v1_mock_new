@@ -100,6 +100,7 @@ export interface MockHomeSliderContent {
   _id: string;
   title: string;
   subtitle: string;
+  logoImageUrl?: string; // Added for logo management
   slides: Array<{
     imageUrl: string;
     altText: string;
@@ -412,6 +413,7 @@ let mockHomeSliderContent: MockHomeSliderContent = {
   _id: 'home-slider-1',
   title: 'Welcome to Shotokan Karate Bangladesh',
   subtitle: 'Discover the art of traditional karate with expert instruction and authentic training methods',
+  logoImageUrl: '/logo.png', // Default logo image
   slides: [
     {
       imageUrl: 'https://images.pexels.com/photos/7045693/pexels-photo-7045693.jpeg',
@@ -914,7 +916,8 @@ export const mockApi = {
   async updateHomeSliderContent(updateData: { 
     title: string; 
     subtitle: string; 
-    slides: Array<{ imageUrl: string; altText: string }> 
+    slides: Array<{ imageUrl: string; altText: string }>;
+    logoImageUrl?: string; // Added for logo management
   }): Promise<{ success: boolean; message: string; data: MockHomeSliderContent }> {
     await simulateApiDelay(1200);
     
@@ -928,6 +931,7 @@ export const mockApi = {
         altText: slide.altText,
         order: index
       })),
+      logoImageUrl: updateData.logoImageUrl,
       updatedAt: new Date().toISOString()
     };
     
