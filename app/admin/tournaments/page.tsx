@@ -25,17 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { 
-  Search, 
-  Trophy, 
-  Users, 
-  Calendar, 
-  MapPin, 
-  Filter,
-  Eye,
-  AlertCircle,
-  Plus
-} from "lucide-react";
+import { Search, Trophy, Users, Calendar, MapPin, Filter, Eye, CircleAlert as AlertCircle, Plus } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { mockApi } from "@/lib/mockData";
 import { Tournament } from "@/types/tournament";
@@ -50,8 +40,8 @@ const TOURNAMENT_STATUS_CONFIG = {
     variant: 'default' as const,
     className: 'bg-blue-100 text-blue-800 hover:bg-blue-200'
   },
-  active: {
-    label: 'Active',
+  ongoing: {
+    label: 'Ongoing',
     variant: 'default' as const,
     className: 'bg-green-100 text-green-800 hover:bg-green-200'
   },
@@ -59,6 +49,11 @@ const TOURNAMENT_STATUS_CONFIG = {
     label: 'Completed',
     variant: 'secondary' as const,
     className: 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+  },
+  cancelled: {
+    label: 'Cancelled',
+    variant: 'secondary' as const,
+    className: 'bg-red-100 text-red-800 hover:bg-red-200'
   }
 };
 
